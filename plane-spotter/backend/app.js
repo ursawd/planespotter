@@ -22,7 +22,11 @@ app.use(cors());
 app.use(express.json());
 // app.use(morgan("tiny"));
 // app.use(authenticateJWT);
-
+function test(req, res, next) {
+  console.log("MIDDLEWARE TEST", req.body);
+  return next();
+}
+app.use(test);
 // app.use("/auth", authRoutes);
 // app.use("/companies", companiesRoutes);
 // app.use("/users", usersRoutes);

@@ -4,32 +4,59 @@ const db = require("./db");
 const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR } = require("./config");
 const { UnauthorizedError } = require("./expressError");
-
-router.get("/", async function (req, res, next) {
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--see if user (email) is in the database, if so return email and hashed password
+router.post("/user", async function (req, res, next) {
   const { email, password } = req.body;
-  console.log(req.body);
-  let response = await login(email, password);
+  //see if email in database
+  let response = await findUser(email);
+  //if rowCount === 0 then no data returned from SQL and email not found
   if (response.rowCount === 0) {
-    return res.json({ error: { message: "not authorized", status: 404 } });
+    return res.json({ error: { message: "email not found", status: 400 } });
   }
-  return res.json({ user: response.rows[0] });
-});
+  //if email found, compare password hash against input password now hashed
+  //if result not true, password does not match
+  const hash = response.rows[0].password;
+  console.log(password, hash);
 
-router.post("/", async function (req, res, next) {
+  const result = await bcrypt.compare(password, hash);
+  if (!result) {
+    console.log("passwords not match");
+    return res.json({ error: { message: "invalid password", status: 401 } });
+  }
+
+  //return data from SQL query which matched email
+  console.log("success");
+  return res.json({ user: response.rows[0], status: 200 });
+});
+//--------------------------------------------------------------------------------
+//register user by checking if email already in database, if not hash password and
+//store user data in database
+router.post("/user/register", async function (req, res, next) {
   const { email, password, firstName, lastName } = req.body;
-  //Hash password with bcrypt
+  //see if email in database, if so return error message
+  let result = await findUser(email);
+  //if rowCount === 0 then no data returned from SQL and email not found
+  if (result.rowCount !== 0) {
+    return res.json({ error: { message: "duplicate email", status: 400 } });
+  }
+  //Hash supplied password with bcrypt
   const hashPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-
+  //make SQL entry into user table
   let response = await register(email, hashPassword, firstName, lastName);
-  return res.json({ success: response });
+  return res.json({ success: response, status: 200 });
 });
-
+//--------------------------------------------------------------------------------
+// return all spottings entries for a specific email (user)
 router.get("/spotting", async function (req, res, next) {
   const { email } = req.body;
   let response = await getSpottings(email);
-  return res.json({ sightings: response.rows });
+  return res.json({ sightings: response.rows, status: 200 });
 });
-
+//--------------------------------------------------------------------------------
+//add to database a spotting entry for a specific eamil (user)
 router.post("/spotting", async function (req, res, next) {
   const {
     userid,
@@ -48,6 +75,7 @@ router.post("/spotting", async function (req, res, next) {
     age,
     plane_status,
   } = req.body;
+
   let response = await createSighting(
     userid,
     registration,
@@ -65,9 +93,12 @@ router.post("/spotting", async function (req, res, next) {
     age,
     plane_status
   );
-  return res.json({ success: response });
+  return res.json({ success: response, status: 200 });
 });
-//------------------------------------------------
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 async function getSpottings(id) {
   const result = await db.query(
     `SELECT * 
@@ -78,17 +109,17 @@ async function getSpottings(id) {
   return result;
 }
 
-async function login(email, password) {
+async function findUser(email) {
   // try to find the user first
   const result = await db.query(
-    `SELECT email,
-            password                
+    `SELECT email,password               
       FROM users
       WHERE email = $1`,
     [email]
   );
   return result;
 }
+//--
 async function register(email, password, firstName, lastName) {
   const result = await db.query(
     `INSERT INTO users
@@ -103,6 +134,7 @@ async function register(email, password, firstName, lastName) {
   );
   return result.rows[0];
 }
+//--
 async function createSighting(
   userid,
   registration,

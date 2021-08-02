@@ -8,7 +8,7 @@ function App() {
 
       <BrowserRouter>
         <Route exact path="/">
-          <Login />
+          <Home />
         </Route>
       </BrowserRouter>
     </div>
