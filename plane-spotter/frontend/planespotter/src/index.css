@@ -1,1 +1,13 @@
+.active{
+  color:black;
+  text-decoration: underline !important;
+}
+a{
+  text-decoration: none !important;
+  font-size: 20px;
+  font-family: fantasy;
+}
 
+h1 {
+  font-family: "Expletus Sans", cursive;
+}

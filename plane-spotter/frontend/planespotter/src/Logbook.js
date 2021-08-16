@@ -1,6 +1,6 @@
 import React from "react";
 
 function Logbook() {
-  return <hi1>Logbook Component</hi1>;
+  return <h1>Logbook Component</h1>;
 }
 export default Logbook;

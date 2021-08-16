@@ -1,41 +1,68 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import React, { useState } from "react";
 import Home from "./Home.js";
-import Login from "./Login.js";
-import Register from "./Register.js";
+import LoginForm from "./LoginForm.js";
+import Logout from "./Logout.js";
+import RegisterForm from "./RegisterForm.js";
 import Logbook from "./Logbook.js";
 import Search from "./Search.js";
 import Navbar from "./Navbar.js";
 import NotFound from "./NotFound.js";
+import axios from "axios";
 
 function App() {
+  const [user, setUser] = useState(null);
+  async function loginFunction({ email, password }) {
+    async function getUser() {
+      const result = await axios.post("http://localhost:3001/user", {
+        email: email,
+        password: password,
+      });
+      return result;
+    }
+    const result = await getUser();
+    if (result.data.hasOwnProperty("error")) {
+      return "error";
+    } else {
+      setUser(result.data.user);
+      return result.data.user;
+    }
+  }
+  //----
   return (
-    <div className="App">
-      <h1> Plane Spotter App</h1>
+    <div>
+      <h1 className="text-light fixed-top bg-primary py-3 mb-3">
+        Plane Spotter {}
+      </h1>
 
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/Logbook">
-            <Logbook />
-          </Route>
-          <Route exact path="/search">
-            <Search />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <div className="App">
+        <BrowserRouter>
+          <Navbar user={user} />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/login">
+              <LoginForm loginFunction={loginFunction} />
+            </Route>
+            <Route exact path="/register">
+              <RegisterForm />
+            </Route>
+            <Route exact path="/logout">
+              <Logout setUser={setUser} />
+            </Route>
+            <Route exact path="/logbook">
+              <Logbook user={user} />
+            </Route>
+            <Route exact path="/search">
+              <Search user={user} />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
 function Search() {
-  return <hi1>Search Component</hi1>;
+  return <h1>Search Component</h1>;
 }
 export default Search;
