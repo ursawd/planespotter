@@ -5,13 +5,13 @@ import LoginForm from "./LoginForm.js";
 import Logout from "./Logout.js";
 import RegisterForm from "./RegisterForm.js";
 import Logbook from "./Logbook.js";
-import Search from "./Search.js";
 import Navbar from "./Navbar.js";
 import NotFound from "./NotFound.js";
 import axios from "axios";
 
 function App() {
   const [user, setUser] = useState(null);
+
   async function loginFunction({ email, password }) {
     async function getUser() {
       const result = await axios.post("http://localhost:3001/user", {
@@ -28,7 +28,29 @@ function App() {
       return result.data.user;
     }
   }
-  //----
+  //-----------------------------------------------------------------
+
+  async function registerFunction({ email, password, firstName, lastName }) {
+    async function getUser() {
+      const result = await axios.post("http://localhost:3001/user/register", {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+      });
+      console.log("result", result.data.success);
+      return result;
+    }
+    const result = await getUser();
+    if (result.data.hasOwnProperty("error")) {
+      return "error";
+    } else {
+      setUser(result.data.success);
+      return result.data.success;
+    }
+  }
+
+  //-----------------------------------------------------------------
   return (
     <div>
       <h1 className="text-light fixed-top bg-primary py-3 mb-3">
@@ -46,16 +68,13 @@ function App() {
               <LoginForm loginFunction={loginFunction} />
             </Route>
             <Route exact path="/register">
-              <RegisterForm />
+              <RegisterForm registerFunction={registerFunction} />
             </Route>
             <Route exact path="/logout">
               <Logout setUser={setUser} />
             </Route>
             <Route exact path="/logbook">
               <Logbook user={user} />
-            </Route>
-            <Route exact path="/search">
-              <Search user={user} />
             </Route>
             <Route>
               <NotFound />

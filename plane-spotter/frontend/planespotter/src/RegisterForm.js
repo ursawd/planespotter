@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import taxiing from "./images/taxiing.jpg";
 
-function Register() {
+function Register({ registerFunction }) {
+  const [userError, setUserError] = useState(null);
+  let history = useHistory();
+
   const INTIAL_STATE = {
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
   };
   const [formData, setFormData] = useState(INTIAL_STATE);
 
@@ -14,7 +20,14 @@ function Register() {
   };
 
   async function handleSubmit(evt) {
-    // evt.preventDefault();
+    evt.preventDefault();
+    let result = await registerFunction({ ...formData });
+
+    if (result === "error") {
+      setUserError(true);
+    } else {
+      history.push("/logbook");
+    }
   }
 
   return (
@@ -64,6 +77,9 @@ function Register() {
                   First name
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.firstName}
+                  name="firstName"
                   type="text"
                   className="form-control"
                   id="firstName"
@@ -76,12 +92,18 @@ function Register() {
                   Last name
                 </label>
                 <input
+                  onChange={handleChange}
+                  value={formData.lastName}
+                  name="lastName"
                   type="text"
                   className="form-control"
                   id="lastName"
                   required
                 />
               </div>
+              {userError && (
+                <p className="text-danger fw-bold">Invalid email or password</p>
+              )}
               <button type="submit" className="btn btn-primary">
                 Register
               </button>
