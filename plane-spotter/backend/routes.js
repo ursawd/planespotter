@@ -51,7 +51,8 @@ router.post("/user/register", async function (req, res, next) {
 //--------------------------------------------------------------------------------
 // return all spottings entries for a specific email (user)
 router.get("/spotting", async function (req, res, next) {
-  const { email } = req.body;
+  const email = req.query.email;
+  console.log("spotting input email=", email);
   let response = await getSpottings(email);
   return res.json({ sightings: response.rows, status: 200 });
 });
@@ -100,6 +101,7 @@ router.post("/spotting", async function (req, res, next) {
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 async function getSpottings(id) {
+  console.log("getSpottings id", id);
   const result = await db.query(
     `SELECT * 
      FROM sightings

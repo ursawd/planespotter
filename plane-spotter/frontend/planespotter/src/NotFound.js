@@ -1,11 +1,13 @@
 import React from "react";
-import goaround from "./images/goaround.webp";
+import chart from "./images/chart.jpg";
 
 function NotFound() {
   return (
-    <div>
-      <h1 className="fs-1 fw-b text-warning">404 - Not Found</h1>
-      <img src={goaround} alt="AN-124 taking off" />
+    <div className="container">
+      <div className="d-flex flex-column align-items-center">
+        <h1 className="fs-1 fw-b text-danger">404 - Not Found</h1>
+        <img src={chart} alt="IFR chart" width="800" />
+      </div>
     </div>
   );
 }
