@@ -14,4 +14,8 @@ h1 {
 th{
   color: blue;
   width: 120px;
+
+}
+#spot-image:hover{
+  height: 400px;
 }

@@ -20,34 +20,42 @@ function DisplaySightings({ user }) {
   return (
     <div>
       <h4>Sightings Log:</h4>
-      {sightings.map((entry) => {
-        return (
-          <div className="mb-2 bg-light">
-            <img src={taxiing} alt="Airplane" height="150"></img>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Registration</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Location</th>
-                  <th>Notes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{entry.registration}</td>
-                  <td>{entry.spotdate}</td>
-                  <td>{entry.spottime}</td>
-                  <td>{entry.location_field}</td>
-                  <td>{entry.notes}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        );
-      })}
+      <div className="">
+        {sightings.map((entry) => {
+          return (
+            <div className="mb-2 bg-light d-flex justify-content-around">
+              <img
+                id="spot-image"
+                src={taxiing}
+                alt="Airplane"
+                height="100"
+              ></img>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Registration</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{entry.registration}</td>
+                    <td>{entry.spotdate}</td>
+                    <td>{entry.spottime}</td>
+                    <td>{entry.location_field}</td>
+                    <td>{entry.notes}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

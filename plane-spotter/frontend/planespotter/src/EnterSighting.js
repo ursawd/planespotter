@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // const testdata = {
 //   userid: "pdb555@gmail.com",
 //   registration: "N1234",
@@ -8,45 +8,106 @@ import React from "react";
 //   notes: "This is a test",
 // };
 function EnterSighting() {
+  const INTIAL_STATE = {
+    registration: "",
+    spotdate: "",
+    spottime: "",
+    location: "",
+    notes: "",
+  };
+  const [formData, setFormData] = useState(INTIAL_STATE);
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setFormData((formData) => ({ ...formData, [name]: value }));
+  };
+
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    // let result = await registerFunction({ ...formData });
+    console.log("handlesubmit", formData);
+  }
+
   return (
     <div className="entryPage">
       <div className="entryContainer d-flex">
         <div className="left">
           <h4>Add a spotting</h4>
-          <form>
+
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="registration" className="form-label">
                 Registration
               </label>
-              <input type="text" className="form-control" id="registration" />
+              <input
+                type="text"
+                className="form-control"
+                id="registration"
+                onChange={handleChange}
+                value={formData.registration}
+                name="registration"
+                required
+              />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="date" className="form-label">
+              <label htmlFor="spotdate" className="form-label">
                 Date
               </label>
-              <input type="text" className="form-control" id="date" />
+              <input
+                type="text"
+                className="form-control"
+                id="spotdate"
+                onChange={handleChange}
+                value={formData.spotdate}
+                name="spotdate"
+                required
+              />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="time" className="form-label">
+              <label htmlFor="spottime" className="form-label">
                 Time
               </label>
-              <input type="text" className="form-control" id="time" />
+              <input
+                type="text"
+                className="form-control"
+                id="spottime"
+                onChange={handleChange}
+                value={formData.spottime}
+                name="spottime"
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label htmlFor="location" className="form-label">
                 Locations
               </label>
-              <input type="text" className="form-control" id="location" />
+              <input
+                type="text"
+                className="form-control"
+                id="location"
+                onChange={handleChange}
+                value={formData.location}
+                name="location"
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label htmlFor="notes" className="form-label">
                 Notes
               </label>
-              <textarea className="form-control" rows="4" id="notes" />
+              <textarea
+                className="form-control"
+                rows="4"
+                id="notes"
+                onChange={handleChange}
+                value={formData.notes}
+                name="notes"
+                required
+              />
             </div>
 
             <button type="submit" className="btn btn-primary">
