@@ -11,3 +11,7 @@ a{
 h1 {
   font-family: "Expletus Sans", cursive;
 }
+th{
+  color: blue;
+  width: 120px;
+}
