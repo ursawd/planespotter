@@ -14,7 +14,7 @@ function Logbook({ user }) {
             <EnterSighting />
           </div>
           <div className="col-md-9 shadow">
-            <DisplaySightings />
+            <DisplaySightings user={user} />
           </div>
         </div>
       </div>
