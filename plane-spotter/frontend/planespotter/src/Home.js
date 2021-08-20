@@ -1,5 +1,6 @@
 import React from "react";
 import inthesky from "./images/inthesky.jpg";
+import entry from "./images/entry.jpg";
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
             <p>
               <cite>From Wikipedia, the free encyclopedia </cite>
             </p>
+            <img src={entry} alt="Logbook entry" width="700" />
           </div>
         </div>
       </div>

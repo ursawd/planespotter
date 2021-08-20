@@ -7,7 +7,7 @@ import React, { useState } from "react";
 //   location_field: "MCO",
 //   notes: "This is a test",
 // };
-function EnterSighting() {
+function EnterSighting({ addSighting }) {
   const INTIAL_STATE = {
     registration: "",
     spotdate: "",
@@ -24,7 +24,7 @@ function EnterSighting() {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // let result = await registerFunction({ ...formData });
+    // let result = await addSighting({ ...formData });
     console.log("handlesubmit", formData);
   }
 
