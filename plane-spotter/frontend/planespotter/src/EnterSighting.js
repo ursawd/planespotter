@@ -24,8 +24,8 @@ function EnterSighting({ addSighting }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // let result = await addSighting({ ...formData });
-    console.log("handlesubmit", formData);
+    let result = await addSighting({ ...formData });
+    console.log("======EnterSightings/handleSubmit/result", "\n", result);
   }
 
   return (

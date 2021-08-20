@@ -38,7 +38,6 @@ function App() {
         firstName: firstName,
         lastName: lastName,
       });
-      console.log("result", result.data.success);
       return result;
     }
     const result = await getUser();

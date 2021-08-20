@@ -10,7 +10,6 @@ function DisplaySightings({ user }) {
       const result = await axios.get(
         `http://localhost:3001/spotting?email=${user.email}`
       );
-      console.log("result", result.data.sightings);
       // return result.data.sightings;
       setSightings(result.data.sightings);
     }
@@ -48,7 +47,9 @@ function DisplaySightings({ user }) {
                     <td>{entry.spotdate}</td>
                     <td>{entry.spottime}</td>
                     <td>{entry.location_field}</td>
-                    <td>{entry.notes}</td>
+                    <td>
+                      <div className="scroll">{entry.notes}</div>
+                    </td>
                   </tr>
                 </tbody>
               </table>
