@@ -23,7 +23,7 @@ function DisplaySightings({ user }) {
       <div className="">
         {sightings.map((entry) => {
           return (
-            <div className="mb-2 bg-light d-flex justify-content-around">
+            <div className="mb-2 bg-light d-flex justify-content-between">
               <img
                 id="spot-image"
                 src={taxiing}
@@ -31,7 +31,7 @@ function DisplaySightings({ user }) {
                 height="100"
               ></img>
 
-              <table>
+              {/* <table>
                 <thead>
                   <tr>
                     <th>Registration</th>
@@ -52,7 +52,24 @@ function DisplaySightings({ user }) {
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> */}
+
+              <div className="divTable">
+                <div className="divTR d-flex">
+                  <div className="divTH">Registration</div>
+                  <div className="divTH">Date</div>
+                  <div className="divTH">Time</div>
+                  <div className="divTH">Location</div>
+                  <div className="divTH">Notes</div>
+                </div>
+                <div className="divTR d-flex">
+                  <div className="divTD">{entry.registration}</div>
+                  <div className="divTD">{entry.spotdate}</div>
+                  <div className="divTD">{entry.spottime}</div>
+                  <div className="divTD scroll">{entry.location_field}</div>
+                  <div className="divTD scroll">{entry.notes}</div>
+                </div>
+              </div>
             </div>
           );
         })}

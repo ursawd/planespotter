@@ -26,8 +26,14 @@ td {
 }
 .scroll{
   width: 100%;
-  height: 100%;
+  height: 75px;
   margin: 0;
   padding: 0;
   overflow:auto;
+}
+.divTH{
+  font-weight: bold;
+  width:115px;
+}.divTD{
+  width: 115px;
 }
