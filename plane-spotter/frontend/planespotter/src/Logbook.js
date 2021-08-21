@@ -39,10 +39,7 @@ function Logbook({ user }) {
         age: "",
         plane_status: "",
       };
-      const result = await axios.post(
-        "http://localhost:3001/spotting",
-        sightingInfo
-      );
+      await axios.post("http://localhost:3001/spotting", sightingInfo);
       setSightings([...sightings, sightingInfo]);
     }
     postSpotting();

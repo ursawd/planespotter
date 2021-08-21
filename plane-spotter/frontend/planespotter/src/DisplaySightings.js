@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import taxiing from "./images/taxiing.jpg";
+import avatar from "./images/avatar.jpg";
 import { v4 as uuid } from "uuid";
+import getImage from "./external-api/get-image";
 
 function DisplaySightings({ user, sightings, setSightings }) {
   useEffect(() => {
@@ -9,8 +10,13 @@ function DisplaySightings({ user, sightings, setSightings }) {
       const result = await axios.get(
         `http://localhost:3001/spotting?email=${user.email}`
       );
+      //---get images from API and insert into each sighting
+
       // return result.data.sightings;
       setSightings(result.data.sightings);
+      //========
+      getImage();
+      //========
       console.log("sightings", result.data.sightings);
     }
     getSightings();
@@ -29,7 +35,7 @@ function DisplaySightings({ user, sightings, setSightings }) {
             >
               <img
                 id="spot-image"
-                src={taxiing}
+                src={avatar}
                 alt="Airplane"
                 height="100"
               ></img>

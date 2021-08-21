@@ -17,7 +17,7 @@ function EnterSighting({ addSighting }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    let result = await addSighting({ ...formData });
+    await addSighting({ ...formData });
     setFormData(INTIAL_STATE);
   }
 
