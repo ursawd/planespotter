@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import taxiing from "./images/taxiing.jpg";
+import { v4 as uuid } from "uuid";
 
 function DisplaySightings({ user }) {
   const [sightings, setSightings] = useState([]);
@@ -23,7 +24,10 @@ function DisplaySightings({ user }) {
       <div className="">
         {sightings.map((entry) => {
           return (
-            <div className="mb-2 bg-light d-flex justify-content-between">
+            <div
+              key={uuid()}
+              className="mb-2 bg-light d-flex justify-content-between"
+            >
               <img
                 id="spot-image"
                 src={taxiing}
