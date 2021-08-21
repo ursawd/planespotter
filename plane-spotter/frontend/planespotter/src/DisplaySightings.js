@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import taxiing from "./images/taxiing.jpg";
 import { v4 as uuid } from "uuid";
 
-function DisplaySightings({ user }) {
-  const [sightings, setSightings] = useState([]);
-
+function DisplaySightings({ user, sightings, setSightings }) {
   useEffect(() => {
     async function getSightings() {
       const result = await axios.get(
@@ -13,9 +11,10 @@ function DisplaySightings({ user }) {
       );
       // return result.data.sightings;
       setSightings(result.data.sightings);
+      console.log("sightings", result.data.sightings);
     }
     getSightings();
-  }, [user.email]);
+  }, [user.email, setSightings]);
 
   return (
     <div>
@@ -34,29 +33,6 @@ function DisplaySightings({ user }) {
                 alt="Airplane"
                 height="100"
               ></img>
-
-              {/* <table>
-                <thead>
-                  <tr>
-                    <th>Registration</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Location</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{entry.registration}</td>
-                    <td>{entry.spotdate}</td>
-                    <td>{entry.spottime}</td>
-                    <td>{entry.location_field}</td>
-                    <td>
-                      <div className="scroll">{entry.notes}</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> */}
 
               <div className="divTable">
                 <div className="divTR d-flex">

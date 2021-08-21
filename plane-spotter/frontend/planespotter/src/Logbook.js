@@ -1,9 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import DisplaySightings from "./DisplaySightings";
 import EnterSighting from "./EnterSighting";
 
 function Logbook({ user }) {
+  const [sightings, setSightings] = useState([]);
+
   if (!user) {
     return (
       <div className="text-center shadow container w-25">
@@ -19,18 +21,8 @@ function Logbook({ user }) {
     location,
     notes,
   }) {
-    console.log(
-      "===========addSighting/props",
-      "\n",
-      registration,
-      spotdate,
-      spottime,
-      location,
-      notes
-    );
     async function postSpotting() {
-      console.log("----In postSpotting");
-      const result = await axios.post("http://localhost:3001/spotting", {
+      let sightingInfo = {
         userid: user.email,
         registration: registration,
         spotdate: spotdate,
@@ -46,8 +38,12 @@ function Logbook({ user }) {
         engtype: "",
         age: "",
         plane_status: "",
-      });
-      console.log("axios", result);
+      };
+      const result = await axios.post(
+        "http://localhost:3001/spotting",
+        sightingInfo
+      );
+      setSightings([...sightings, sightingInfo]);
     }
     postSpotting();
     return "addSighting function";
@@ -63,7 +59,11 @@ function Logbook({ user }) {
             <EnterSighting addSighting={addSighting} />
           </div>
           <div className="col-md-9 shadow">
-            <DisplaySightings user={user} />
+            <DisplaySightings
+              user={user}
+              sightings={sightings}
+              setSightings={setSightings}
+            />
           </div>
         </div>
       </div>

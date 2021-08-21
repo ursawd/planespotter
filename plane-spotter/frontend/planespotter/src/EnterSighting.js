@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-// const testdata = {
-//   userid: "pdb555@gmail.com",
-//   registration: "N1234",
-//   spotdate: "Jan 1 2021",
-//   spottime: "5:00pm",
-//   location_field: "MCO",
-//   notes: "This is a test",
-// };
+
 function EnterSighting({ addSighting }) {
   const INTIAL_STATE = {
     registration: "",
@@ -25,7 +18,7 @@ function EnterSighting({ addSighting }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await addSighting({ ...formData });
-    console.log("======EnterSightings/handleSubmit/result", "\n", result);
+    setFormData(INTIAL_STATE);
   }
 
   return (
