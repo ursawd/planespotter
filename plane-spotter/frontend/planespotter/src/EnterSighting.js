@@ -17,6 +17,7 @@ function EnterSighting({ addSighting }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    //addSighting function in Logbook.js
     await addSighting({ ...formData });
     setFormData(INTIAL_STATE);
   }

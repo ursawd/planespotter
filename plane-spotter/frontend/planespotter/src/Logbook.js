@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import DisplaySightings from "./DisplaySightings";
 import EnterSighting from "./EnterSighting";
+import getImage from "./external-api/get-image";
 
 function Logbook({ user }) {
   const [sightings, setSightings] = useState([]);
@@ -13,7 +14,7 @@ function Logbook({ user }) {
         <p>Please Login / Register before accessing this page</p>
       </div>
     );
-  }
+  } // addSighting call from EnterSighting
   async function addSighting({
     registration,
     spotdate,
@@ -39,6 +40,10 @@ function Logbook({ user }) {
         age: "",
         plane_status: "",
       };
+      //
+      const result = await getImage(registration);
+      sightingInfo.imgurl = result;
+      //
       await axios.post("http://localhost:3001/spotting", sightingInfo);
       setSightings([...sightings, sightingInfo]);
     }

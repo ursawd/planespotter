@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import avatar from "./images/avatar.jpg";
 import { v4 as uuid } from "uuid";
 import getImage from "./external-api/get-image";
 
