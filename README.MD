@@ -18,7 +18,7 @@ The Plane Spotter website allows users to keep a logbook of specific aircraft si
 
 ## Project Features
 
-The Plane Spotter project is designed about a Node and Express backend accessing an external API for retrieving aircraft images. Sighting information is stored in PostgreSQL data and retrieved for each logged in user. The front UI is comprised of a JavaScript and React forntend. Access control is accomplished using the bcrypt password-hashing function. Layout and styling are accomplished using Bootstrap-5 and CSS. 
+The Plane Spotter project is designed about a Node and Express backend accessing an external API for retrieving aircraft images. Sighting information is stored in PostgreSQL data and retrieved for each logged in user. The frontend UI is comprised of a JavaScript and React forntend. Access control is accomplished using the bcrypt password-hashing function. Layout and styling are accomplished using Bootstrap-5 and CSS.
 
 ## Tech Stack
 
@@ -65,20 +65,52 @@ Node Express JavaScript React HTML CSS GIT Axios PostgreSQL bCrypt vscode
 ### Home Page
 <img src="images/home.jpg" width=600>
 
+<br><br>
+
+***
+
 ### Login
 <img src="images/login.jpg" width=600>
+
+<br><br>
+
+***
 
 ### Register
 <img src="images/registration.jpg" width=600>
 
+<br><br>
+
+***
+
+
 ### Logbook
 <img src="images/logbook.jpg" width=600>
+
+<br><br>
+
+***
+
 
 ### Logout
 <img src="images/logout.jpg" width=600>
 
+<br><br>
+
+***
+
+
 ### 404 Not Found
 <img src="images/notfound.jpg" width=600>
 
+<br><br>
+
+***
+
+
 ### Not Authorized
 <img src="images/notauthorized.jpg" width=600>
+
+<br><br>
+
+***
