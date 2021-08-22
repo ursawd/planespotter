@@ -11,13 +11,19 @@ function DisplaySightings({ user, sightings, setSightings }) {
         `http://localhost:3001/spotting?email=${user.email}`
       );
       //---get images from API and insert into each sighting
-
+      const sightingsWithImages = await Promise.all(
+        result.data.sightings.map(async (sighting) => {
+          const regNum = sighting.registration;
+          const SRC = await getImage(regNum);
+          sighting.imgurl = SRC;
+          return sighting;
+        })
+      );
+      //----------------------------------------------------
       // return result.data.sightings;
-      setSightings(result.data.sightings);
-      //========
-      getImage();
-      //========
-      console.log("sightings", result.data.sightings);
+      setSightings(sightingsWithImages);
+
+      console.log("sightings", sightingsWithImages);
     }
     getSightings();
   }, [user.email, setSightings]);
@@ -35,7 +41,7 @@ function DisplaySightings({ user, sightings, setSightings }) {
             >
               <img
                 id="spot-image"
-                src={avatar}
+                src={entry.imgurl}
                 alt="Airplane"
                 height="100"
               ></img>

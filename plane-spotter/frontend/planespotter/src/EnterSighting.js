@@ -107,6 +107,8 @@ function EnterSighting({ addSighting }) {
               Add To Log
             </button>
           </form>
+          <p className="m-0 p-0">Test registration numbers:</p>
+          <p className="m-0 p-0">522AX B779XY HA-LHU</p>
         </div>
       </div>
     </div>
