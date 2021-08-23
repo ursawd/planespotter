@@ -1,6 +1,7 @@
 import React from "react";
 import chart from "./images/chart.jpg";
 
+//Not Found component
 function NotFound() {
   return (
     <div className="container">

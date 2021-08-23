@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import taxiing from "./images/taxiing.jpg";
 
+//--Register component is user registration form. Submission of form
+//creates entry into local database and then executes login logic
+//to set user state with user information.
 function Register({ registerFunction }) {
   const [userError, setUserError] = useState(null);
   let history = useHistory();

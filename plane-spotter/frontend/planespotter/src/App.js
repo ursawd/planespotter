@@ -11,7 +11,8 @@ import axios from "axios";
 
 function App() {
   const [user, setUser] = useState(null);
-
+  //loginFunction -- takes user input from login form and if user
+  //authenticated sets user state to user information
   async function loginFunction({ email, password }) {
     async function getUser() {
       const result = await axios.post("http://localhost:3001/user", {
@@ -29,6 +30,8 @@ function App() {
     }
   }
   //-----------------------------------------------------------------
+  //loginFunction -- takes user input from registration form and enters user
+  // into database. Then if userauthenticated sets user state to user information
 
   async function registerFunction({ email, password, firstName, lastName }) {
     async function getUser() {

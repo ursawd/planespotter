@@ -4,6 +4,10 @@ import DisplaySightings from "./DisplaySightings";
 import EnterSighting from "./EnterSighting";
 import getImage from "./external-api/get-image";
 
+//Logbook is the app display component. The left side is the sighting
+//information entry form and the right side is the list of the the
+//aircraft sightings. Hover over the image and the image expands (CSS).
+//If user is not signed in, a Not Authorized page is displayed/
 function Logbook({ user }) {
   const [sightings, setSightings] = useState([]);
 
@@ -14,7 +18,7 @@ function Logbook({ user }) {
         <p>Please Login / Register before accessing this page</p>
       </div>
     );
-  } // addSighting call from EnterSighting
+  } // addSighting called from EnterSighting
   async function addSighting({
     registration,
     spotdate,
@@ -40,10 +44,10 @@ function Logbook({ user }) {
         age: "",
         plane_status: "",
       };
-      //
+      //Get aircraft image URL from external API
       const result = await getImage(registration);
       sightingInfo.imgurl = result;
-      //
+      //POST sighting information into local database
       await axios.post("http://localhost:3001/spotting", sightingInfo);
       setSightings([...sightings, sightingInfo]);
     }

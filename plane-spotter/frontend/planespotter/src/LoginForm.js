@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import taxiing from "./images/taxiing.jpg";
 
+//Basic login form
 function LoginForm({ loginFunction }) {
   const [userError, setUserError] = useState(null);
   let history = useHistory();
@@ -18,6 +19,7 @@ function LoginForm({ loginFunction }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    //Authenticates user
     let user = await loginFunction({ ...formData });
     if (user === "error") {
       setUserError(true);

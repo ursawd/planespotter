@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+//--EnterSighting is the form on the logbook page that takes in the
+//users sighting information. Standard data entry form.
 function EnterSighting({ addSighting }) {
   const INTIAL_STATE = {
     registration: "",

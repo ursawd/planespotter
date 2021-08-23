@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import hanger from "./images/hanger.jpg";
 import { Link } from "react-router-dom";
-
+//Logs user out by setting user state to null
 function Logout({ setUser }) {
   useEffect(() => {
     setUser(null);

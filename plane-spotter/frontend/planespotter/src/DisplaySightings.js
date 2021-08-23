@@ -21,8 +21,6 @@ function DisplaySightings({ user, sightings, setSightings }) {
       //----------------------------------------------------
       // return result.data.sightings;
       setSightings(sightingsWithImages);
-
-      console.log("sightings", sightingsWithImages);
     }
     getSightings();
   }, [user.email, setSightings]);
